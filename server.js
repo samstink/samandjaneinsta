@@ -79,7 +79,11 @@ Instagram.subscriptions.unsubscribe({ id: '3668016' });
 // https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
 io.configure(function () {
   io.set("transports", [
-    'xhr-polling'
+    'websocket'
+    , 'xhr-polling'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'jsonp-polling'
   ]);
   io.set("polling duration", 10);
 });
