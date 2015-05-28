@@ -51,7 +51,7 @@ Instagram.subscriptions.subscribe({
  */
 Instagram.subscriptions.subscribe({
   object: 'tag',
-  object_id: 'samandjane2015',
+  object_id: 'yolo',
   aspect: 'media',
   callback_url: 'http://thawing-sierra-2031.herokuapp.com/callback',
   type: 'subscription',
