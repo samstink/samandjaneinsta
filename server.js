@@ -26,8 +26,8 @@ var clientID = 'b8d26105555b4bdea454603ccc88cb25',
  */
 Instagram.set('client_id', clientID);
 Instagram.set('client_secret', clientSecret);
-Instagram.set('callback_url', 'http://thawing-sierra-2031.herokuapp.com/callback');
-Instagram.set('redirect_uri', 'http://thawing-sierra-2031.herokuapp.com');
+Instagram.set('callback_url', 'https://thawing-sierra-2031.herokuapp.com/callback');
+Instagram.set('redirect_uri', 'https://thawing-sierra-2031.herokuapp.com');
 Instagram.set('maxSockets', 10);
 
 /**
@@ -39,7 +39,7 @@ Instagram.subscriptions.subscribe({
   object: 'tag',
   object_id: 'samandjane',
   aspect: 'media',
-  callback_url: 'http://thawing-sierra-2031.herokuapp.com/callback',
+  callback_url: 'https://thawing-sierra-2031.herokuapp.com/callback',
   type: 'subscription',
   id: '#'
 });
@@ -53,7 +53,7 @@ Instagram.subscriptions.subscribe({
   object: 'tag',
   object_id: 'yolo',
   aspect: 'media',
-  callback_url: 'http://thawing-sierra-2031.herokuapp.com/callback',
+  callback_url: 'https://thawing-sierra-2031.herokuapp.com/callback',
   type: 'subscription',
   id: '#'
 });

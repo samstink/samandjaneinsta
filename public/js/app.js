@@ -1,5 +1,5 @@
 (function() {
-    var socket = io.connect('http://thawing-sierra-2031.herokuapp.com');
+    var socket = io.connect('https://thawing-sierra-2031.herokuapp.com');
 
     /**
      * [Namespacing]
