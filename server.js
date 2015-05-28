@@ -115,8 +115,8 @@ app.get("/views", function(req, res){
  * and send to the client side via socket.emit
  */
 io.sockets.on('connection', function (socket) {
-  Instagram.tags.search({
-      q: 'samandjane',
+  Instagram.tags.recent({
+      name: 'samandjane',
       complete: function(data) {
         socket.emit('firstShow', { firstShow: data });
       }
