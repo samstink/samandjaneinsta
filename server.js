@@ -74,7 +74,7 @@ Instagram.subscriptions.subscribe({
 
 // if you want to unsubscribe to any hashtag you subscribe
 // just need to pass the ID Instagram send as response to you
-Instagram.subscriptions.unsubscribe({ id: '3668016' });
+Instagram.subscriptions.unsubscribe({ id: '18371547' });
 
 // https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
 io.configure(function () {
@@ -115,8 +115,8 @@ app.get("/views", function(req, res){
  * and send to the client side via socket.emit
  */
 io.sockets.on('connection', function (socket) {
-  Instagram.tags.recent({
-      name: 'lollapalooza',
+  Instagram.tags.search({
+      q: 'samandjane',
       complete: function(data) {
         socket.emit('firstShow', { firstShow: data });
       }
