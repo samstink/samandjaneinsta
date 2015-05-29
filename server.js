@@ -39,22 +39,6 @@ var client = new Twitter({
     access_token_secret: "X98bB3c0XN3ygEHUYWz9UTkt5do5DEexQXVaJSHpWMrxZ"
 });
 
-
-/**
- * Stream statuses filtered by keyword
- * number of tweets per second depends on topic popularity
- **/
-client.stream('statuses/filter', {track: 'samandjane'},  function(stream){
-
-    stream.on('data', function(tweet) {
-        console.log(tweet.text);
-    });
-
-    stream.on('error', function(error) {
-        console.log(error);
-    });
-});
-
 /**
  * Uses the library "instagram-node-lib" to Subscribe to the Instagram API Real Time
  * with the tag "hashtag" lollapalooza
@@ -140,13 +124,13 @@ app.get("/views", function(req, res){
  * and send to the client side via socket.emit
  */
 io.sockets.on('connection', function (socket) {
-  Instagram.tags.recent({
-      name: 'samandjane',
-      complete: function(data) {
-        socket.emit('firstShow', { firstShow: data });
-      }
-  });
 
+    Instagram.tags.recent({
+        name: 'samandjane',
+        complete: function(data) {
+            socket.emit('firstShow', { firstShow: data });
+        }
+    });
 
     vine.login("samfairbairn@hotmail.co.uk", "corinthians", function(err, response) {
         // Logged in!  Now you can use any other authenticated API... Like fetching your timeline or the most popular videos.
@@ -156,6 +140,21 @@ io.sockets.on('connection', function (socket) {
             console.log(response);
         });
 
+    });
+
+    /**
+     * Stream statuses filtered by keyword
+     * number of tweets per second depends on topic popularity
+     **/
+    client.stream('statuses/filter', {track: 'samandjane'},  function(stream){
+
+        stream.on('data', function(tweet) {
+            console.log(tweet.text);
+        });
+
+        stream.on('error', function(error) {
+            console.log(error);
+        });
     });
 
 });
