@@ -43,9 +43,7 @@ var client = new Twitter({
  * Stream statuses filtered by keyword
  * number of tweets per second depends on topic popularity
  **/
-client.stream('statuses/filter', {track: 'yolo'},  function(stream){
-
-    console.log('## stream data');
+client.stream('statuses/filter', {track: 'samandjane'},  function(stream){
 
     stream.on('data', function(tweet) {
         console.log(tweet.text);
@@ -147,6 +145,18 @@ io.sockets.on('connection', function (socket) {
         socket.emit('firstShow', { firstShow: data });
       }
   });
+
+
+    vine.login("samfairbairn@hotmail.co.uk", "corinthians", function(err, response) {
+        // Logged in!  Now you can use any other authenticated API... Like fetching your timeline or the most popular videos.
+
+        vine.popular(function(err, response) {
+            // response contains a list the most popular Vines
+            console.log(response);
+        });
+
+    });
+
 });
 
 /**
