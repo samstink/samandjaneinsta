@@ -44,6 +44,9 @@ var client = new Twitter({
  * number of tweets per second depends on topic popularity
  **/
 client.stream('statuses/filter', {track: 'yolo'},  function(stream){
+
+    console.log('## stream data');
+
     stream.on('data', function(tweet) {
         console.log(tweet.text);
     });
