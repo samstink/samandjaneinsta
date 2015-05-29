@@ -6,6 +6,7 @@ var Instagram = require('instagram-node-lib');
 var Twitter = require('twitter');
 var http = require('http');
 var request = ('request');
+var vine = require('node-vine');
 var intervalID;
 
 /**
