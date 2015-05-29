@@ -3,7 +3,7 @@ var app = express();
 var port = process.env.PORT || 3700;
 var io = require('socket.io').listen(app.listen(port));
 var Instagram = require('instagram-node-lib');
-var Twitter = require('twitter');
+//var Twitter = require('twitter');
 var http = require('http');
 var request = ('request');
 //var vine = require('node-vine');
@@ -32,18 +32,18 @@ Instagram.set('callback_url', 'https://thawing-sierra-2031.herokuapp.com/callbac
 Instagram.set('redirect_uri', 'https://thawing-sierra-2031.herokuapp.com');
 Instagram.set('maxSockets', 10);
 
-var client = new Twitter({
+/*var client = new Twitter({
     consumer_key: "zcmMx36qWiUcplttv0U2rh5eE",
     consumer_secret: "PdDO1NpUUS5xBFk8RuNJn5zvi6HiOKg4B6P7r8F4NSNXuPiCnL",
     access_token_key: "44387693-4TNHyJ5elWZGLbuRWiWqnlOH9AxjLatC3Mhnb2MsL",
     access_token_secret: "X98bB3c0XN3ygEHUYWz9UTkt5do5DEexQXVaJSHpWMrxZ"
-});
+});*/
 
 /**
  * Stream statuses filtered by keyword
  * number of tweets per second depends on topic popularity
  **/
-client.stream('statuses/filter', {track: 'yolo'},  function(stream){
+/*client.stream('statuses/filter', {track: 'yolo'},  function(stream){
 
     stream.on('data', function(tweet) {
         console.log(tweet.text);
@@ -52,7 +52,7 @@ client.stream('statuses/filter', {track: 'yolo'},  function(stream){
     stream.on('error', function(error) {
         console.log(error);
     });
-});
+});*/
 
 
 /**
