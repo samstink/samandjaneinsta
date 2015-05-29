@@ -43,7 +43,7 @@ var client = new Twitter({
  * Stream statuses filtered by keyword
  * number of tweets per second depends on topic popularity
  **/
-client.stream('statuses/filter', {track: '#yolo'},  function(stream){
+client.stream('statuses/filter', {track: 'yolo'},  function(stream){
     stream.on('data', function(tweet) {
         console.log(tweet.text);
     });
