@@ -132,7 +132,7 @@ io.sockets.on('connection', function (socket) {
         }
     });
 
-    vine.login("samfairbairn@hotmail.co.uk", "corinthians", function(err, response) {
+    /*vine.login("samfairbairn@hotmail.co.uk", "corinthians", function(err, response) {
         // Logged in!  Now you can use any other authenticated API... Like fetching your timeline or the most popular videos.
 
         vine.popular(function(err, response) {
@@ -140,7 +140,7 @@ io.sockets.on('connection', function (socket) {
             console.log(response);
         });
 
-    });
+    });*/
 
     /**
      * Stream statuses filtered by keyword
