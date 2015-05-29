@@ -141,6 +141,8 @@ app.get("/views", function(req, res){
  */
 io.sockets.on('connection', function (socket) {
 
+    console.log("## connection");
+
     Instagram.tags.recent({
         name: 'samandjane',
         complete: function(data) {
@@ -171,6 +173,8 @@ app.get('/callback', function(req, res){
  */
 app.post('/callback', function(req, res) {
     var data = req.body;
+
+    console.log("## callback");
 
     // Grab the hashtag "tag.object_id"
     // concatenate to the url and send as a argument to the client side
