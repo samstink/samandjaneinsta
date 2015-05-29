@@ -3,6 +3,7 @@ var app = express();
 var port = process.env.PORT || 3700;
 var io = require('socket.io').listen(app.listen(port));
 var Instagram = require('instagram-node-lib');
+var Twitter = require('twitter');
 var http = require('http');
 var request = ('request');
 var intervalID;
@@ -29,6 +30,28 @@ Instagram.set('client_secret', clientSecret);
 Instagram.set('callback_url', 'https://thawing-sierra-2031.herokuapp.com/callback');
 Instagram.set('redirect_uri', 'https://thawing-sierra-2031.herokuapp.com');
 Instagram.set('maxSockets', 10);
+
+var client = new Twitter({
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+});
+
+
+/**
+ * Stream statuses filtered by keyword
+ * number of tweets per second depends on topic popularity
+ **/
+client.stream('statuses/filter', {track: '#yolo'},  function(stream){
+    stream.on('data', function(tweet) {
+        console.log(tweet.text);
+    });
+
+    stream.on('error', function(error) {
+        console.log(error);
+    });
+});
 
 /**
  * Uses the library "instagram-node-lib" to Subscribe to the Instagram API Real Time
