@@ -45,7 +45,7 @@ var AppWrapper = React.createClass({
 
             var exists = false;
 
-            $.each(self.state.items.slice(0, 20), function(index, oldItem){
+            $.each(self.state.items, function(index, oldItem){
 
                 if(!exists && newItem.id === oldItem.id) {
                     exists = true;
