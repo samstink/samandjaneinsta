@@ -1,13 +1,14 @@
 var React = require("react/addons");
 var $ = require("jquery");
 var io = require("socket.io-client");
+var ImageList = require("./imageList.jsx");
 
 var AppWrapper = React.createClass({
 
 
     getInitialState: function () {
 
-        return { data: [] };
+        return { items: [] };
 
     },
 
@@ -46,7 +47,7 @@ var AppWrapper = React.createClass({
         return (
             <div className="AppWrapper">
                 <h1>Welcome</h1>
-                <ImageList items={this.state.data} />
+                <ImageList items={this.state.items} />
             </div>
         );
 
