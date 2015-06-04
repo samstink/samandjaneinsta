@@ -27,10 +27,28 @@ var AppWrapper = React.createClass({
             }).done(function (data) {
                 //self.renderTemplate(data);
                 console.log('socket response', data);
-                self.setState({ items: data.data });
+                self.updateItems(data.data);
 
             });
         });
+
+    },
+
+
+    updateItems: function (data) {
+
+        var newItems = this.state.items;
+
+        $.each(data, function(index, ele){
+
+            if(this.state.items.indexOf(ele) === -1) {
+                console.log('item doesnt exist');
+                newItems.push(ele);
+            }
+
+        });
+
+        self.setState({ items: newItems });
 
     },
 
