@@ -5,8 +5,6 @@ var ImageList = React.createClass({
 
     render: function() {
 
-        console.log(this.props);
-
         var createItem = function(item, index) {
             return <li className="ImageList-item" ><img className="ImageList-image" src={item.images.low_resolution.url} /></li>;
         };

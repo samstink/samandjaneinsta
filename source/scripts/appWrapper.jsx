@@ -26,7 +26,6 @@ var AppWrapper = React.createClass({
                 dataType: 'jsonp'
             }).done(function (data) {
                 //self.renderTemplate(data);
-                console.log('socket response', data);
                 self.updateItems(data.data);
 
             });
@@ -45,7 +44,7 @@ var AppWrapper = React.createClass({
 
             var exists = false;
 
-            $.each(self.state.items, function(index, oldItem){
+            $.each(self.state.items, function(index, oldItem) {
 
                 if(!exists && newItem.id === oldItem.id) {
                     exists = true;
@@ -54,7 +53,7 @@ var AppWrapper = React.createClass({
             });
 
             if(!exists) {
-                console.log('item doesnt exist');
+                console.log('adding new item :> ', newItem);
                 newItems.unshift(newItem);
             }
 
@@ -72,14 +71,16 @@ var AppWrapper = React.createClass({
 
         this.socket = io.connect(this.props.url);
 
+        this.socket.on('firstShow', function(data) {
+            self.setState({ items: data.data });
+        });
+
         this.loadCommentsFromServer();
 
     },
 
 
     render: function () {
-
-        console.log(this.state.items);
 
         return (
             <div className="AppWrapper">

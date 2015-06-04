@@ -62,7 +62,7 @@ Instagram.set('maxSockets', 10);
  */
 Instagram.subscriptions.subscribe({
   object: 'tag',
-  object_id: 'testing',
+  object_id: 'samandjane',
   aspect: 'media',
   callback_url: 'https://thawing-sierra-2031.herokuapp.com/callback',
   type: 'subscription',
@@ -74,32 +74,32 @@ Instagram.subscriptions.subscribe({
  * with the tag "hashtag" lollapalooza2013
  * @type {String}
  */
-/*Instagram.subscriptions.subscribe({
+Instagram.subscriptions.subscribe({
   object: 'tag',
   object_id: 'samandjane2015',
   aspect: 'media',
   callback_url: 'https://thawing-sierra-2031.herokuapp.com/callback',
   type: 'subscription',
   id: '#'
-});*/
+});
 
 /**
  * Uses the library "instagram-node-lib" to Subscribe to the Instagram API Real Time
  * with the tag "hashtag" lolla2013
  * @type {String}
  */
-/*Instagram.subscriptions.subscribe({
+Instagram.subscriptions.subscribe({
   object: 'tag',
-  object_id: 'sam&jane2015',
+  object_id: 'sam&jane',
   aspect: 'media',
   callback_url: 'http://samandjane.herokuapp.com/callback',
   type: 'subscription',
   id: '#'
-});*/
+});
 
 // if you want to unsubscribe to any hashtag you subscribe
 // just need to pass the ID Instagram send as response to you
-Instagram.subscriptions.unsubscribe({ id: '18469807' });
+Instagram.subscriptions.unsubscribe({ id: '18472495' });
 
 // https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
 io.configure(function () {
@@ -141,8 +141,6 @@ app.get("/views", function(req, res){
  */
 io.sockets.on('connection', function (socket) {
 
-    console.log("## connection");
-
     Instagram.tags.recent({
         name: 'samandjane',
         complete: function(data) {
@@ -173,8 +171,6 @@ app.get('/callback', function(req, res){
  */
 app.post('/callback', function(req, res) {
     var data = req.body;
-
-    console.log("## callback");
 
     // Grab the hashtag "tag.object_id"
     // concatenate to the url and send as a argument to the client side
