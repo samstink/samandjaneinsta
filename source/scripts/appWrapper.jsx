@@ -36,7 +36,6 @@ var AppWrapper = React.createClass({
 
     updateItems: function (data) {
 
-
         var self = this;
         var newItems = this.state.items;
 
@@ -63,12 +62,12 @@ var AppWrapper = React.createClass({
 
         });
 
-
     },
 
 
     componentDidMount: function () {
 
+        var self = this;
         this.socket = io.connect(this.props.url);
 
         this.socket.on('firstShow', function(data) {
