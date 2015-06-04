@@ -37,20 +37,33 @@ var AppWrapper = React.createClass({
 
     updateItems: function (data) {
 
-        var self = this;
 
+        var self = this;
         var newItems = this.state.items;
 
-        $.each(data, function(index, ele){
+        $.each(data, function(newItemIndex, newItem){
 
-            if(self.state.items.indexOf(ele) === -1) {
+            var exists = false;
+
+            $.each(self.state.items.slice(0, 20), function(index, oldItem){
+
+                if(!exists && newItem.id === oldItem.id) {
+                    exists = true;
+                }
+
+            });
+
+            if(!exists) {
                 console.log('item doesnt exist');
-                newItems.push(ele);
+                newItems.unshift(newItem);
+            }
+
+            if(newItemIndex === data.length - 1) {
+                self.setState({ items: newItems });
             }
 
         });
 
-        self.setState({ items: newItems });
 
     },
 
