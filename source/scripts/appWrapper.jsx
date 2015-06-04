@@ -27,7 +27,7 @@ var AppWrapper = React.createClass({
             }).done(function (data) {
                 //self.renderTemplate(data);
                 console.log('socket response', data);
-                self.setState({ items: data });
+                self.setState({ items: data.data });
 
             });
         });
