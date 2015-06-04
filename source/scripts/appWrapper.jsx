@@ -83,7 +83,6 @@ var AppWrapper = React.createClass({
 
         return (
             <div className="AppWrapper">
-                <h1>Welcome</h1>
                 <ImageList items={this.state.items} />
             </div>
         );
