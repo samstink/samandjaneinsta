@@ -12,14 +12,17 @@ body {
     align-content: flex-start;*/
 }
 .ImageList-item {
+  position: relative;
   list-style: none;
   padding: 0;
   margin: 0;
-  display: inline-block;
+  display: block;
   width: 20%;
   height: 0;
   padding-top: 20%;
-  margin-top: 50%;
+  -webkit-transform: translateY(200%);
+      -ms-transform: translateY(200%);
+          transform: translateY(200%);
   float: left;
 }
 .ImageList-item::nth-child(1) {
