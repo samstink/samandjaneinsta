@@ -19,21 +19,16 @@ var AppWrapper = React.createClass({
 
         this.socket.on('show', function(data) {
             var url = data.show;
-
             $.ajax({
                 url: url,
                 type: 'POST',
                 crossDomain: true,
-                dataType: 'jsonp',
-                success: function ( data ) {
-                    console.log('socket response', data);
-                    this.setState({ items: data });
-                }.bind(this),
-                error: function ( xhr, status, err ) {
-                    console.log( this.props.url, status, err.toString() );
-                }.bind(this)
+                dataType: 'jsonp'
+            }).done(function (data) {
+                //self.renderTemplate(data);
+                console.log('socket response', data);
+                self.setState({ data: data });
             });
-
         });
 
     },
