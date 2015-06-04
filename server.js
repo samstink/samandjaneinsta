@@ -62,7 +62,7 @@ Instagram.set('maxSockets', 10);
  */
 Instagram.subscriptions.subscribe({
   object: 'tag',
-  object_id: 'yolo',
+  object_id: 'testing',
   aspect: 'media',
   callback_url: 'https://thawing-sierra-2031.herokuapp.com/callback',
   type: 'subscription',
@@ -99,7 +99,7 @@ Instagram.subscriptions.subscribe({
 
 // if you want to unsubscribe to any hashtag you subscribe
 // just need to pass the ID Instagram send as response to you
-Instagram.subscriptions.unsubscribe({ id: '18384682' });
+Instagram.subscriptions.unsubscribe({ id: '18469807' });
 
 // https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
 io.configure(function () {
