@@ -37,11 +37,13 @@ var AppWrapper = React.createClass({
 
     updateItems: function (data) {
 
+        var self = this;
+
         var newItems = this.state.items;
 
         $.each(data, function(index, ele){
 
-            if(this.state.items.indexOf(ele) === -1) {
+            if(self.state.items.indexOf(ele) === -1) {
                 console.log('item doesnt exist');
                 newItems.push(ele);
             }
