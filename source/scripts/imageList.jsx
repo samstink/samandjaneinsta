@@ -5,6 +5,8 @@ var ImageList = React.createClass({
 
     render: function() {
 
+        console.log(this.props);
+
         var createItem = function() {
             return <li></li>;
         };

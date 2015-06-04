@@ -46,6 +46,8 @@ var AppWrapper = React.createClass({
 
     render: function () {
 
+        console.log(this.state.items);
+
         return (
             <div className="AppWrapper">
                 <h1>Welcome</h1>
