@@ -7,9 +7,10 @@ var ImageList = React.createClass({
 
         console.log(this.props);
 
-        var createItem = function() {
-            return <li></li>;
+        var createItem = function(item, index) {
+            return <li><img src={item.images.low_resolution.url} /></li>;
         };
+
         return <ul className="ImageList">{this.props.items.map(createItem)}</ul>;
 
     }
