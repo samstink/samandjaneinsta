@@ -71,8 +71,7 @@ var AppWrapper = React.createClass({
         this.socket = io.connect(this.props.url);
 
         this.socket.on('firstShow', function(data) {
-            console.log('fistshow', data);
-            //self.setState({ items: data.data });
+            self.setState({ items: data.firstShow });
         });
 
         this.loadCommentsFromServer();
