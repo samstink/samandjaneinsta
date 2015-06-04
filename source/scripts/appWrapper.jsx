@@ -71,6 +71,7 @@ var AppWrapper = React.createClass({
         this.socket = io.connect(this.props.url);
 
         this.socket.on('firstShow', function(data) {
+            console.log('first show data', data);
             self.setState({ items: data.firstShow });
         });
 
