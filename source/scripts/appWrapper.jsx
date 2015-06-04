@@ -1,7 +1,6 @@
 var React = require("react/addons");
 var $ = require("jquery");
 var io = require("socket.io-client");
-//var io = require("socket.io-client").connect('https://thawing-sierra-2031.herokuapp.com');
 
 var AppWrapper = React.createClass({
 
@@ -9,12 +8,14 @@ var AppWrapper = React.createClass({
     getInitialState: function () {
 
         return { data: [] };
+
     },
 
 
     loadCommentsFromServer: function () {
 
         var self = this;
+
         this.socket.on('show', function(data) {
             var url = data.show;
             $.ajax({
@@ -33,10 +34,9 @@ var AppWrapper = React.createClass({
 
     componentDidMount: function () {
 
-        this.socket = io.connect('https://thawing-sierra-2031.herokuapp.com');
+        this.socket = io.connect(this.props.url);
 
         this.loadCommentsFromServer();
-
 
     },
 
@@ -46,8 +46,10 @@ var AppWrapper = React.createClass({
         return (
             <div className="AppWrapper">
                 <h1>Welcome</h1>
+                <ImageList items={this.state.data} />
             </div>
         );
+
     }
 });
 

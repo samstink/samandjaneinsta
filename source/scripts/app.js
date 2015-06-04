@@ -3,6 +3,6 @@ var React = require("react/addons");
 var AppWrapper = require("./appWrapper.jsx");
 
 React.render(
-<AppWrapper url="http://localhost:3000/" />,
+<AppWrapper url="https://thawing-sierra-2031.herokuapp.com" />,
     document.body
 );
