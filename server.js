@@ -170,7 +170,7 @@ io.sockets.on('connection', function (socket) {
 
             var initialList = sj.concat(sj15);
             initialList.sort(function(a, b) {
-                return a.created_time - b.created_time;
+                return b.created_time - a.created_time;
             });
 
             socket.emit('firstShow', { firstShow: initialList });
