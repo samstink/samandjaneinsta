@@ -155,7 +155,7 @@ io.sockets.on('connection', function (socket) {
     });
 
     Instagram.tags.recent({
-        name: 'samandjane',
+        name: 'samandjane2015',
         complete: function(data) {
             sj15 = data;
             checkInitialList();
@@ -167,7 +167,13 @@ io.sockets.on('connection', function (socket) {
         console.log('checking list');
         if(sj !== false && sj15 !== false) {
             console.log('both ready');
-            socket.emit('firstShow', { firstShow: sj });
+
+            var initialList = sj.concat(sj15);
+            initialList.sort(function(a, b) {
+                return a.created_time - b.created_time;
+            });
+
+            socket.emit('firstShow', { firstShow: initialList });
         }
     };
 
