@@ -139,14 +139,37 @@ app.get("/views", function(req, res){
  * On socket.io connection we get the most recent posts
  * and send to the client side via socket.emit
  */
+
+
 io.sockets.on('connection', function (socket) {
+
+    var sj, sj15 = false;
 
     Instagram.tags.recent({
         name: 'samandjane',
         complete: function(data) {
-            socket.emit('firstShow', { firstShow: data });
+            sj = data;
+            checkInitialList();
+            //socket.emit('firstShow', { firstShow: data });
         }
     });
+
+    Instagram.tags.recent({
+        name: 'samandjane',
+        complete: function(data) {
+            sj15 = data;
+            checkInitialList();
+            //socket.emit('firstShow', { firstShow: data });
+        }
+    });
+
+    var checkInitialList = function() {
+        console.log('checking list');
+        if(sj !== false && sj15 !== false) {
+            console.log('both ready');
+            socket.emit('firstShow', { firstShow: sj });
+        }
+    };
 
     /*vine.login("samfairbairn@hotmail.co.uk", "corinthians", function(err, response) {
         // Logged in!  Now you can use any other authenticated API... Like fetching your timeline or the most popular videos.
@@ -158,6 +181,7 @@ io.sockets.on('connection', function (socket) {
 
     });*/
 });
+
 
 /**
  * Needed to receive the handshake
