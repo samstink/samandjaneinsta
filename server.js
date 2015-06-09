@@ -158,45 +158,46 @@ io.sockets.on('connection', function (socket) {
     Instagram.tags.recent({
         name: 'samandjane',
         complete: function(data) {
-            createNewInstaList(data, function(data){
+            /*createNewInstaList(data, function(data){
                 sj = data;
                 checkLists();
-                self.io.sockets.emit('initialTweet', { data: data });
-            });
+            });*/
+            io.sockets.emit('initialInsta', { data: data });
         }
     });
 
     Instagram.tags.recent({
         name: 'samandjane2015',
         complete: function(data) {
-            createNewInstaList(data, function(data){
+            /*createNewInstaList(data, function(data){
                 sj15 = data;
                 checkLists();
-                self.io.sockets.emit('initialTweet', { data: data });
-            });
+            });*/
+            io.sockets.emit('initialInsta', { data: data });
         }
     });
 
     client.get('search/tweets', {q: '#samandjane', result_type: 'recent'}, function(error, tweets, response){
         if(error) throw error;
 
-        createNewInstaList(tweets.statuses, function(data){
+        /*createNewInstaList(tweets.statuses, function(data){
             twSJ = data;
             checkLists();
-            self.io.sockets.emit('initialTweet', { data: data });
-        });
+        });*/
 
+        io.sockets.emit('initialTweet', { data: tweets.statuses });
 
     });
 
     client.get('search/tweets', {q: '#samandjane2015', result_type: 'recent'}, function(error, tweets, response){
         if(error) throw error;
 
-        createNewInstaList(tweets.statuses, function(data){
+        /*createNewInstaList(tweets.statuses, function(data){
             twSJ15 = data;
             checkLists();
-            self.io.sockets.emit('initialTweet', { data: data });
-        });
+        });*/
+
+        io.sockets.emit('initialTweet', { data: tweets.statuses });
 
     });
 

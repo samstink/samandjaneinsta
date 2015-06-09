@@ -103,17 +103,81 @@ var AppWrapper = React.createClass({
         var self = this;
         this.socket = io.connect(this.props.url);
 
-        this.socket.on('firstShow', function(data) {
+        var initialList = [];
+
+        this.socket.on('initialInsta', function(data) {
             console.log('first show data', data);
+            self.createNewInstaList(data);
             //self.setState({ items: data.firstShow });
         });
 
         this.socket.on('initialTweet', function(data) {
             console.log('first tweet data', data);
+            self.createNewTweetList(data);
             //self.setState({ items: data.firstShow });
         });
 
         this.loadCommentsFromServer();
+
+    },
+
+
+    createNewTweetList : function(list) {
+
+        var newList = [];
+
+        for(var i = 0; i < list.length; i++) {
+
+            if(list[i].entities.media && list[i].entities.media[0].type == "photo") {
+
+                var newObj = {time: '', img: '', url: ''};
+
+                newObj.time = Math.round(Date.parse(list[i].created_at) / 1000);
+                newObj.img = list[i].entities.media[0].media_url;
+                newObj.url = list[i].entities.media[0].url;
+
+                newList.push(newObj);
+
+                if(i === list.length - 1 ) {
+                    console.log('created new list');
+                    self.updateList(newList);
+                }
+            }
+        }
+    },
+
+    createNewInstaList : function(list) {
+
+        var newList = [];
+
+        for(var i = 0; i < list.length; i++) {
+
+            var newObj = {time: '', img: '', url: ''};
+
+            newObj.time = list[i].created_time;
+            newObj.img = list[i].images.standard_resolution.url;
+            newObj.url = list[i].link;
+
+            newList.push(newObj);
+
+            if(i === list.length - 1 ) {
+                console.log('created new list');
+                self.updateList(newList);
+            }
+        }
+    },
+
+    updateList: function(list) {
+
+
+        var initialList = this.state.items.concat(list);
+
+        initialList.sort(function(a, b) {
+            return b.time - a.time;
+        });
+
+        self.setState({ items: initialList });
+
 
     },
 
