@@ -108,10 +108,10 @@ var AppWrapper = React.createClass({
             //self.setState({ items: data.firstShow });
         });
 
-        /*this.socket.on('initialTweet', function(data) {
+        this.socket.on('initialTweet', function(data) {
             console.log('first tweet data', data);
             //self.setState({ items: data.firstShow });
-        });*/
+        });
 
         this.loadCommentsFromServer();
 

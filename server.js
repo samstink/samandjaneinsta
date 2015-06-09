@@ -156,35 +156,45 @@ io.sockets.on('connection', function (socket) {
     Instagram.tags.recent({
         name: 'samandjane',
         complete: function(data) {
-            sj = createNewInstaList(data);
-            checkLists();
+            createNewInstaList(data, function(data){
+                sj = data;
+                checkLists();
+            });
         }
     });
 
     Instagram.tags.recent({
         name: 'samandjane2015',
         complete: function(data) {
-            sj15 = createNewInstaList(data);
-            checkLists();
+            createNewInstaList(data, function(data){
+                sj15 = data;
+                checkLists();
+            });
         }
     });
 
     client.get('search/tweets', {q: '#samandjane', result_type: 'recent'}, function(error, tweets, response){
         if(error) throw error;
 
-        twSJ = createNewTweetList(tweets);
-        checkLists();
+        createNewInstaList(tweets, function(data){
+            twSJ = data;
+            checkLists();
+        });
+
     });
 
     client.get('search/tweets', {q: '#samandjane2015', result_type: 'recent'}, function(error, tweets, response){
         if(error) throw error;
 
-        twSJ15 = createNewTweetList(tweets);
-        checkLists();
-        //io.sockets.emit('initialTweet', { data: tweets });
+        createNewInstaList(tweets, function(data){
+            twSJ15 = data;
+            checkLists();
+        });
+
+        io.sockets.emit('initialTweet', { data: tweets });
     });
 
-    var createNewTweetList = function(list) {
+    var createNewTweetList = function(list, callback) {
 
         var newList = [];
 
@@ -202,13 +212,13 @@ io.sockets.on('connection', function (socket) {
 
                 if(i === list.length - 1 ) {
                     console.log('created new list');
-                    return newList;
+                    callback(newList);
                 }
             }
         }
     };
 
-    var createNewInstaList = function(list) {
+    var createNewInstaList = function(list, callback) {
 
         var newList = [];
 
@@ -224,7 +234,7 @@ io.sockets.on('connection', function (socket) {
 
             if(i === list.length - 1 ) {
                 console.log('created new list');
-                return newList;
+                callback(newList);
             }
         }
     };
