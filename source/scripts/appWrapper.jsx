@@ -59,10 +59,17 @@ var AppWrapper = React.createClass({
 
     },
 
-    addTwitterToItems: function (data, photo) {
+    addTwitterToItems: function (data, media) {
 
         var newItems = this.state.items;
+
+        data.time = Math.round(Date.parse(data.created_at) / 1000);
+        data.img = media.media_url;
+        data.url = media.url;
+
         newItems.unshift(data);
+
+        this.setState({ items: newItems });
 
     },
 
@@ -86,6 +93,11 @@ var AppWrapper = React.createClass({
 
             if(!exists) {
                 console.log('adding new item :> ', newItem);
+
+                newItem.time = newItem.created_time;
+                newItem.img = newItem.images.standard_resolution.url;
+                newItem.url = newItem.link;
+
                 newItems.unshift(newItem);
             }
 
