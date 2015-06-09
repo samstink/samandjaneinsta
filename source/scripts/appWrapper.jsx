@@ -32,8 +32,37 @@ var AppWrapper = React.createClass({
         });
 
         this.socket.on('tweet', function(data) {
+
             console.log('tweet', data);
+
+                $.each(data.tweet, function(index, tweet){
+
+                    if(tweet.entities.media.length > 0) {
+
+                        tweet.time = tweet.timestamp_ms.substring(0,10);
+
+                        $.each(tweet.entities.media, function (index, media) {
+
+                            if (media.type === "photo") {
+
+                                self.addTwitterToItems(tweet, media);
+
+                            }
+
+                        });
+
+                    }
+
+                });
+
         });
+
+    },
+
+    addTwitterToItems: function (data, photo) {
+
+        var newItems = this.state.items;
+        newItems.unshift(data);
 
     },
 
@@ -77,6 +106,11 @@ var AppWrapper = React.createClass({
         this.socket.on('firstShow', function(data) {
             console.log('first show data', data);
             self.setState({ items: data.firstShow });
+        });
+
+        this.socket.on('initialTweet', function(data) {
+            console.log('first tweet data', data);
+            //self.setState({ items: data.firstShow });
         });
 
         this.loadCommentsFromServer();

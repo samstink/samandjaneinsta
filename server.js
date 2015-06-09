@@ -43,6 +43,20 @@ var client = new Twitter({
  * Stream statuses filtered by keyword
  * number of tweets per second depends on topic popularity
  **/
+
+/*client.get('statuses/user_timeline', params, function(error, tweets, response){
+    if (!error) {
+        console.log(tweets);
+    }
+});*/
+
+client.get('statuses/filter', {track: '#samandjane'}, function(error, tweets, response){
+    if(error) throw error;
+    console.log(tweets);  // The favorites.
+    console.log(response);  // Raw response object.
+    io.sockets.emit('initialTweet', { data: tweets, resp: response });
+});
+
 client.stream('statuses/filter', {track: '#samandjane2015'},  function(stream){
 
     stream.on('data', function(tweet) {
@@ -54,6 +68,8 @@ client.stream('statuses/filter', {track: '#samandjane2015'},  function(stream){
         console.log(error);
     });
 });
+
+
 
 
 /**
