@@ -181,7 +181,7 @@ io.sockets.on('connection', function (socket) {
         io.sockets.emit('initialTweet', { data: tweets, resp: response });
     });*/
 
-    client.get('search/tweets', {q: '#samandjane2015', result_type: 'recent'}, function(error, tweets, response){
+    client.get('search/tweets', {q: '#samandjane2015'}, function(error, tweets, response){
         if(error) throw error;
         console.log(tweets);
         io.sockets.emit('initialTweet', { data: tweets, resp: response });
