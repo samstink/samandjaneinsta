@@ -201,6 +201,7 @@ io.sockets.on('connection', function (socket) {
                 newList.push(newObj);
 
                 if(i === list.length - 1 ) {
+                    console.log('created new list');
                     return newList;
                 }
             }
@@ -222,6 +223,7 @@ io.sockets.on('connection', function (socket) {
             newList.push(newObj);
 
             if(i === list.length - 1 ) {
+                console.log('created new list');
                 return newList;
             }
         }
