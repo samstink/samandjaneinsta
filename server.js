@@ -151,6 +151,8 @@ app.get("/views", function(req, res){
 
 io.sockets.on('connection', function (socket) {
 
+    var self = this;
+
     var sj, sj15, twSJ, twSJ15 = false;
 
     Instagram.tags.recent({
@@ -159,6 +161,7 @@ io.sockets.on('connection', function (socket) {
             createNewInstaList(data, function(data){
                 sj = data;
                 checkLists();
+                self.io.sockets.emit('initialTweet', { data: data });
             });
         }
     });
@@ -169,6 +172,7 @@ io.sockets.on('connection', function (socket) {
             createNewInstaList(data, function(data){
                 sj15 = data;
                 checkLists();
+                self.io.sockets.emit('initialTweet', { data: data });
             });
         }
     });
@@ -179,7 +183,7 @@ io.sockets.on('connection', function (socket) {
         createNewInstaList(tweets.statuses, function(data){
             twSJ = data;
             checkLists();
-            io.sockets.emit('initialTweet', { data: data });
+            self.io.sockets.emit('initialTweet', { data: data });
         });
 
 
@@ -191,7 +195,7 @@ io.sockets.on('connection', function (socket) {
         createNewInstaList(tweets.statuses, function(data){
             twSJ15 = data;
             checkLists();
-            io.sockets.emit('initialTweet', { data: data });
+            self.io.sockets.emit('initialTweet', { data: data });
         });
 
     });
