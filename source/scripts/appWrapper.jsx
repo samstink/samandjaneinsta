@@ -106,14 +106,14 @@ var AppWrapper = React.createClass({
         var initialList = [];
 
         this.socket.on('initialInsta', function(data) {
-            console.log('first show data', data);
-            self.createNewInstaList(data);
+            console.log('first show data', data.data);
+            self.createNewInstaList(data.data);
             //self.setState({ items: data.firstShow });
         });
 
         this.socket.on('initialTweet', function(data) {
-            console.log('first tweet data', data);
-            self.createNewTweetList(data);
+            console.log('first tweet data', data.data);
+            self.createNewTweetList(data.data);
             //self.setState({ items: data.firstShow });
         });
 
