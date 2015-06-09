@@ -50,13 +50,6 @@ var client = new Twitter({
     }
 });*/
 
-client.get('statuses/filter', {track: '#samandjane'}, function(error, tweets, response){
-    if(error) throw error;
-    console.log(tweets);  // The favorites.
-    console.log(response);  // Raw response object.
-    io.sockets.emit('initialTweet', { data: tweets, resp: response });
-});
-
 client.stream('statuses/filter', {track: '#samandjane2015'},  function(stream){
 
     stream.on('data', function(tweet) {
@@ -178,6 +171,14 @@ io.sockets.on('connection', function (socket) {
             checkInitialList();
             //socket.emit('firstShow', { firstShow: data });
         }
+    });
+
+
+    client.get('statuses/filter', {track: '#samandjane', result_type: 'recent'}, function(error, tweets, response){
+        if(error) throw error;
+        console.log(tweets);  // The favorites.
+        console.log(response);  // Raw response object.
+        io.sockets.emit('initialTweet', { data: tweets, resp: response });
     });
 
     var checkInitialList = function() {
