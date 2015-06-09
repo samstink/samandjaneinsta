@@ -176,6 +176,8 @@ var AppWrapper = React.createClass({
             return b.time - a.time;
         });
 
+        console.log(initialList);
+
         self.setState({ items: initialList });
 
 
