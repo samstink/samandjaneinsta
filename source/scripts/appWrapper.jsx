@@ -140,7 +140,7 @@ var AppWrapper = React.createClass({
 
                 if(i === list.length - 1 ) {
                     console.log('created new list');
-                    self.updateList(newList);
+                    this.updateList(newList);
                 }
             }
         }
@@ -162,13 +162,14 @@ var AppWrapper = React.createClass({
 
             if(i === list.length - 1 ) {
                 console.log('created new list');
-                self.updateList(newList);
+                this.updateList(newList);
             }
         }
     },
 
     updateList: function(list) {
 
+        console.log('updateList');
 
         var initialList = this.state.items.concat(list);
 
