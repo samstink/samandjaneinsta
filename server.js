@@ -176,17 +176,19 @@ io.sockets.on('connection', function (socket) {
     client.get('search/tweets', {q: '#samandjane', result_type: 'recent'}, function(error, tweets, response){
         if(error) throw error;
 
-        createNewInstaList(tweets, function(data){
+        createNewInstaList(tweets.statuses, function(data){
             twSJ = data;
             checkLists();
         });
+
+        io.sockets.emit('initialTweet', { data: tweets });
 
     });
 
     client.get('search/tweets', {q: '#samandjane2015', result_type: 'recent'}, function(error, tweets, response){
         if(error) throw error;
 
-        createNewInstaList(tweets, function(data){
+        createNewInstaList(tweets.statuses, function(data){
             twSJ15 = data;
             checkLists();
         });
