@@ -174,10 +174,16 @@ io.sockets.on('connection', function (socket) {
     });
 
 
-    client.get('statuses/filter', {track: '#samandjane', result_type: 'recent'}, function(error, tweets, response){
+    /*client.get('statuses/filter', {q: '#samandjane', result_type: 'recent'}, function(error, tweets, response){
         if(error) throw error;
         console.log(tweets);  // The favorites.
         console.log(response);  // Raw response object.
+        io.sockets.emit('initialTweet', { data: tweets, resp: response });
+    });*/
+
+    client.get('search/tweets', {q: '#samandjane', result_type: 'recent'}, function(error, tweets, response){
+        if(error) throw error;
+        console.log(tweets);
         io.sockets.emit('initialTweet', { data: tweets, resp: response });
     });
 
