@@ -179,9 +179,9 @@ io.sockets.on('connection', function (socket) {
         createNewInstaList(tweets.statuses, function(data){
             twSJ = data;
             checkLists();
+            io.sockets.emit('initialTweet', { data: data });
         });
 
-        io.sockets.emit('initialTweet', { data: tweets });
 
     });
 
@@ -191,9 +191,9 @@ io.sockets.on('connection', function (socket) {
         createNewInstaList(tweets.statuses, function(data){
             twSJ15 = data;
             checkLists();
+            io.sockets.emit('initialTweet', { data: data });
         });
 
-        io.sockets.emit('initialTweet', { data: tweets });
     });
 
     var createNewTweetList = function(list, callback) {
