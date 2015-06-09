@@ -45,7 +45,7 @@ var AppWrapper = React.createClass({
 
                             if (media.type === "photo") {
 
-                                self.addTwitterToItems(tweet, media);
+                                self.addTwitterToItems(data.tweet, media);
 
                             }
 
@@ -83,6 +83,10 @@ var AppWrapper = React.createClass({
 
             var exists = false;
 
+            newItem.time = newItem.created_time;
+            newItem.img = newItem.images.standard_resolution.url;
+            newItem.url = newItem.link;
+
             $.each(self.state.items, function(index, oldItem) {
 
                 if(!exists && newItem.id === oldItem.id) {
@@ -93,10 +97,6 @@ var AppWrapper = React.createClass({
 
             if(!exists) {
                 console.log('adding new item :> ', newItem);
-
-                newItem.time = newItem.created_time;
-                newItem.img = newItem.images.standard_resolution.url;
-                newItem.url = newItem.link;
 
                 newItems.unshift(newItem);
             }
