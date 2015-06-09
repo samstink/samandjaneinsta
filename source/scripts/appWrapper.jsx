@@ -156,11 +156,15 @@ var AppWrapper = React.createClass({
 
         for(var i = 0; i < list.length; i++) {
 
+            console.log(list[i]);
+
             var newObj = {time: '', img: '', url: ''};
 
             newObj.time = list[i].created_time;
             newObj.img = list[i].images.standard_resolution.url;
             newObj.url = list[i].link;
+
+            console.log('newObj', newObj);
 
             newList.push(newObj);
 
