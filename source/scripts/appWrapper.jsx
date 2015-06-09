@@ -31,6 +31,10 @@ var AppWrapper = React.createClass({
             });
         });
 
+        this.socket.on('tweet', function(data) {
+            console.log('tweet', data);
+        });
+
     },
 
 
