@@ -124,6 +124,8 @@ var AppWrapper = React.createClass({
 
     createNewTweetList : function(list) {
 
+        console.log('createNewTweetList', list);
+
         var newList = [];
 
         for(var i = 0; i < list.length; i++) {
@@ -147,6 +149,8 @@ var AppWrapper = React.createClass({
     },
 
     createNewInstaList : function(list) {
+
+        console.log('createNewInstaList', list);
 
         var newList = [];
 
