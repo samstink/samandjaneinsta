@@ -62,6 +62,18 @@ client.stream('statuses/filter', {track: '#samandjane2015'},  function(stream){
     });
 });
 
+client.stream('statuses/filter', {track: '#samandjane'},  function(stream){
+
+    stream.on('data', function(tweet) {
+        console.log(tweet.text);
+        io.sockets.emit('tweet', { tweet: tweet });
+    });
+
+    stream.on('error', function(error) {
+        console.log(error);
+    });
+});
+
 
 
 
@@ -89,20 +101,6 @@ Instagram.subscriptions.subscribe({
   object_id: 'samandjane2015',
   aspect: 'media',
   callback_url: 'https://thawing-sierra-2031.herokuapp.com/callback',
-  type: 'subscription',
-  id: '#'
-});
-
-/**
- * Uses the library "instagram-node-lib" to Subscribe to the Instagram API Real Time
- * with the tag "hashtag" lolla2013
- * @type {String}
- */
-Instagram.subscriptions.subscribe({
-  object: 'tag',
-  object_id: 'sam&jane',
-  aspect: 'media',
-  callback_url: 'http://samandjane.herokuapp.com/callback',
   type: 'subscription',
   id: '#'
 });
@@ -153,63 +151,99 @@ app.get("/views", function(req, res){
 
 io.sockets.on('connection', function (socket) {
 
-    var sj, sj15 = false;
+    var sj, sj15, twSJ, twSJ15 = false;
 
     Instagram.tags.recent({
         name: 'samandjane',
         complete: function(data) {
-            sj = data;
-            checkInitialList();
-            //socket.emit('firstShow', { firstShow: data });
+            sj = createNewInstaList(data);
+            checkLists();
         }
     });
 
     Instagram.tags.recent({
         name: 'samandjane2015',
         complete: function(data) {
-            sj15 = data;
-            checkInitialList();
-            //socket.emit('firstShow', { firstShow: data });
+            sj15 = createNewInstaList(data);
+            checkLists();
         }
     });
-
-
-    /*client.get('statuses/filter', {q: '#samandjane', result_type: 'recent'}, function(error, tweets, response){
-        if(error) throw error;
-        console.log(tweets);  // The favorites.
-        console.log(response);  // Raw response object.
-        io.sockets.emit('initialTweet', { data: tweets, resp: response });
-    });*/
 
     client.get('search/tweets', {q: '#samandjane', result_type: 'recent'}, function(error, tweets, response){
         if(error) throw error;
-        console.log(tweets);
-        io.sockets.emit('initialTweet', { data: tweets, resp: response });
+
+        twSJ = createNewTweetList(tweets);
+        checkLists();
     });
 
-    var checkInitialList = function() {
-        console.log('checking list');
-        if(sj !== false && sj15 !== false) {
-            console.log('both ready');
+    client.get('search/tweets', {q: '#samandjane2015', result_type: 'recent'}, function(error, tweets, response){
+        if(error) throw error;
 
-            var initialList = sj.concat(sj15);
-            initialList.sort(function(a, b) {
-                return b.created_time - a.created_time;
-            });
+        twSJ15 = createNewTweetList(tweets);
+        checkLists();
+        //io.sockets.emit('initialTweet', { data: tweets });
+    });
 
-            socket.emit('firstShow', { firstShow: initialList });
+    var createNewTweetList = function(list) {
+
+        var newList = [];
+
+        for(var i = 0; i < list.length; i++) {
+
+            if(list[i].entities.media && list[i].entities.media[0].type == "photo") {
+
+                var newObj = {time: '', img: '', url: ''};
+
+                newObj.time = Math.round(Date.parse(list[i].created_at) / 1000);
+                newObj.img = list[i].entities.media[0].media_url;
+                newObj.url = list[i].entities.media[0].url;
+
+                newList.push(newObj);
+
+                if(i === list.length - 1 ) {
+                    return newList;
+                }
+            }
         }
     };
 
-    /*vine.login("samfairbairn@hotmail.co.uk", "corinthians", function(err, response) {
-        // Logged in!  Now you can use any other authenticated API... Like fetching your timeline or the most popular videos.
+    var createNewInstaList = function(list) {
 
-        vine.popular(function(err, response) {
-            // response contains a list the most popular Vines
-            console.log(response);
-        });
+        var newList = [];
 
-    });*/
+        for(var i = 0; i < list.length; i++) {
+
+            var newObj = {time: '', img: '', url: ''};
+
+            newObj.time = list[i].created_time;
+            newObj.img = list[i].images.standard_resolution.url;
+            newObj.url = list[i].link;
+
+            newList.push(newObj);
+
+            if(i === list.length - 1 ) {
+                return newList;
+            }
+        }
+    };
+
+    var checkLists = function() {
+
+        if(sj !== false && sj15 !== false && twSJ !== false && twSJ15 !== false) {
+
+            var initialList = sj.concat(sj15, twSJ, twSJ15);
+
+            initialList.sort(function(a, b) {
+                return b.time - a.time;
+            });
+
+            socket.emit('firstShow', { firstShow: initialList });
+
+        }
+
+    };
+
+
 });
 
 

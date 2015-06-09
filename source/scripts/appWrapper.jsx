@@ -35,13 +35,13 @@ var AppWrapper = React.createClass({
 
             console.log('tweet', data);
 
-                $.each(data.tweet, function(index, tweet){
+                //$.each(data.tweet, function(index, tweet){
 
-                    if(tweet.entities.media.length > 0) {
+                    if(data.tweet.entities.media.length > 0) {
 
-                        tweet.time = tweet.timestamp_ms.substring(0,10);
+                        data.tweet.time = data.tweet.timestamp_ms.substring(0,10);
 
-                        $.each(tweet.entities.media, function (index, media) {
+                        $.each(data.tweet.entities.media, function (index, media) {
 
                             if (media.type === "photo") {
 
@@ -53,7 +53,7 @@ var AppWrapper = React.createClass({
 
                     }
 
-                });
+                //});
 
         });
 
@@ -105,13 +105,13 @@ var AppWrapper = React.createClass({
 
         this.socket.on('firstShow', function(data) {
             console.log('first show data', data);
-            self.setState({ items: data.firstShow });
-        });
-
-        this.socket.on('initialTweet', function(data) {
-            console.log('first tweet data', data);
             //self.setState({ items: data.firstShow });
         });
+
+        /*this.socket.on('initialTweet', function(data) {
+            console.log('first tweet data', data);
+            //self.setState({ items: data.firstShow });
+        });*/
 
         this.loadCommentsFromServer();
 
