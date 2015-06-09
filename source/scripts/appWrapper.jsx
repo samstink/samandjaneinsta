@@ -187,7 +187,7 @@ var AppWrapper = React.createClass({
 
         console.log(initialList);
 
-        self.setState({ items: initialList });
+        this.setState({ items: initialList });
 
 
     },
