@@ -91,7 +91,6 @@ var AppWrapper = React.createClass({
 
             if(newItem.type === 'video') {
               newItem.video = newItem.videos.standard_resolution.url;
-              location.reload();
             }
 
             $.each(self.state.items, function(index, oldItem) {
@@ -104,6 +103,10 @@ var AppWrapper = React.createClass({
 
             if(!exists) {
                 console.log('adding new item :> ', newItem);
+
+                if(newItem.type === 'video') {
+                  location.reload();
+                }
 
                 newItems.unshift(newItem);
             }
@@ -226,6 +229,7 @@ var AppWrapper = React.createClass({
         return (
             <div className="AppWrapper">
                 <ImageList items={this.state.items} />
+                <h1 className="Text-title">instagram or tweet an image <span className="Text-Larger">#samandjane2015</span></h1>
             </div>
         );
 
