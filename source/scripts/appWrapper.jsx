@@ -123,10 +123,10 @@ var AppWrapper = React.createClass({
 
     reloadVideos: function() {
 
-      $.each($('.ImageList-video'), function(index, ele){
-        ele[0].load();
-        ele[0].play();
-      });
+      // $.each($('.ImageList-video'), function(index, ele){
+      //   ele[0].load();
+      //   ele[0].play();
+      // });
 
     },
 

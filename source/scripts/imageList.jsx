@@ -5,6 +5,15 @@ var ImageList = React.createClass({
 
     componentDidUpdate: function() {
       console.log('component did update');
+
+      $.each($('.ImageList-video'), function(index, ele) {
+
+              console.log(ele);
+
+              ele[0].load();
+              ele[0].play();
+      });
+
     },
 
     render: function() {
