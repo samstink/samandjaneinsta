@@ -66,6 +66,7 @@ var AppWrapper = React.createClass({
         data.time = Math.round(Date.parse(data.created_at) / 1000);
         data.img = media.media_url;
         data.url = media.url;
+        data.type = 'image';
 
         newItems.unshift(data);
 
@@ -86,6 +87,12 @@ var AppWrapper = React.createClass({
             newItem.time = newItem.created_time;
             newItem.img = newItem.images.standard_resolution.url;
             newItem.url = newItem.link;
+            //newItem.type = newItem.type;
+
+            if(newItem.type === 'video') {
+              newItem.video = newItem.videos.standard_resolution.url;
+
+            }
 
             $.each(self.state.items, function(index, oldItem) {
 
@@ -147,8 +154,9 @@ var AppWrapper = React.createClass({
                 var newObj = {time: '', img: '', url: ''};
 
                 newObj.time = Math.round(Date.parse(list[i].created_at) / 1000);
-                newObj.img = list[i].entities.media[0].media_url;
+                newObj.img = list[i].entities.media[0].media_url_https;
                 newObj.url = list[i].entities.media[0].url;
+                newObj.type = 'image';
 
                 newList.push(newObj);
 
@@ -176,6 +184,13 @@ var AppWrapper = React.createClass({
             newObj.img = list[i].images.standard_resolution.url;
             newObj.url = list[i].link;
             newObj.id = list[i].id;
+
+            newObj.type = list[i].type;
+
+            if(newObj.type === 'video') {
+              newObj.video = list[i].videos.standard_resolution.url;
+
+            }
 
             console.log('newObj', newObj);
 
