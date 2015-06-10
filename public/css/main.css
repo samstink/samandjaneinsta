@@ -12,13 +12,13 @@ body {
   font-family: 'Bangers', cursive;
   padding: 0;
   margin: 0;
-  font-size: 10vw;
+  font-size: 3vw;
   -webkit-text-stroke: 1px #000;
   color: #fff;
   text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 .Text-title.Text-Larger {
-  font-size: 12vw;
+  font-size: 5vw;
 }
 .ImageList {
   display: block;
