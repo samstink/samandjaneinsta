@@ -3,6 +3,10 @@ var $ = require("jquery");
 
 var ImageList = React.createClass({
 
+    componentDidUpdate: function() {
+      console.log('component did update');
+    },
+
     render: function() {
 
         var createItem = function(item, index) {
