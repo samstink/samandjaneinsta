@@ -17,7 +17,7 @@ var ImageList = React.createClass({
               media = <img className="ImageList-image" src={item.img} />;
             }
 
-            return <li className="ImageList-item" >{media}</li>;
+            return <li className="ImageList-item" ><a className="ImageList-link" href={item.url} target="_blank">{media}</a></li>;
         };
 
         return <ul className="ImageList">{this.props.items.map(createItem)}</ul>;
