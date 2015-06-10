@@ -91,7 +91,7 @@ var AppWrapper = React.createClass({
 
             if(newItem.type === 'video') {
               newItem.video = newItem.videos.standard_resolution.url;
-
+              location.reload();
             }
 
             $.each(self.state.items, function(index, oldItem) {
