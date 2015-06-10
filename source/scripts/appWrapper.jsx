@@ -71,6 +71,7 @@ var AppWrapper = React.createClass({
         newItems.unshift(data);
 
         this.setState({ items: newItems });
+        this.reloadVideos();
 
     },
 
@@ -104,18 +105,28 @@ var AppWrapper = React.createClass({
             if(!exists) {
                 console.log('adding new item :> ', newItem);
 
-                if(newItem.type === 'video') {
-                  location.reload();
-                }
+                // if(newItem.type === 'video') {
+                //   location.reload();
+                // }
 
                 newItems.unshift(newItem);
             }
 
             if(newItemIndex === data.length - 1) {
                 self.setState({ items: newItems });
+                self.reloadVideos();
             }
 
         });
+
+    },
+
+    reloadVideos: function() {
+
+      $.each($('.ImageList-video'), function(index, ele){
+        ele[0].load();
+        ele[0].play();
+      });
 
     },
 
@@ -219,6 +230,7 @@ var AppWrapper = React.createClass({
         console.log(initialList);
 
         this.setState({ items: initialList });
+        this.reloadVideos();
 
 
     },
