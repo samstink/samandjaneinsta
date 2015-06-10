@@ -10,8 +10,8 @@ var ImageList = React.createClass({
 
               console.log(ele);
 
-              ele[0].load();
-              ele[0].play();
+              ele.load();
+              ele.play();
       });
 
     },
