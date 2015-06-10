@@ -5,11 +5,11 @@ var ImageList = React.createClass({
 
     render: function() {
 
-
-
         var createItem = function(item, index) {
 
             var media;
+            var rando = Math.round(Math.random()*10000);
+            var classname = "ImageList-link class-" + rando;
 
             if (item.type === 'video') {
               media = <video className="ImageList-video" width="640" height="640" autoPlay controls="false" loop="true" muted="true"><source src={item.video} type="video/mp4" /></video>;
@@ -17,7 +17,7 @@ var ImageList = React.createClass({
               media = <img className="ImageList-image" src={item.img} />;
             }
 
-            return <li className="ImageList-item" ><a className="ImageList-link" href={item.url} target="_blank">{media}</a></li>;
+            return <li className="ImageList-item" ><a className={classname} href={item.url} target="_blank">{media}</a></li>;
         };
 
         return <ul className="ImageList">{this.props.items.map(createItem)}</ul>;
