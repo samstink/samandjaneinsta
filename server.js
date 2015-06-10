@@ -61,7 +61,7 @@ client.stream('statuses/filter', {track: '#samandjane2015'},  function(stream){
         console.log(error);
     });
 });
-
+/*
 client.stream('statuses/filter', {track: '#samandjane'},  function(stream){
 
     stream.on('data', function(tweet) {
@@ -72,7 +72,7 @@ client.stream('statuses/filter', {track: '#samandjane'},  function(stream){
     stream.on('error', function(error) {
         console.log(error);
     });
-});
+}); */
 
 
 
@@ -82,14 +82,14 @@ client.stream('statuses/filter', {track: '#samandjane'},  function(stream){
  * with the tag "hashtag" lollapalooza
  * @type {String}
  */
-Instagram.subscriptions.subscribe({
+/*Instagram.subscriptions.subscribe({
   object: 'tag',
   object_id: 'samandjane',
   aspect: 'media',
   callback_url: 'https://thawing-sierra-2031.herokuapp.com/callback',
   type: 'subscription',
   id: '#'
-});
+});*/
 
 /**
  * Uses the library "instagram-node-lib" to Subscribe to the Instagram API Real Time
@@ -107,7 +107,7 @@ Instagram.subscriptions.subscribe({
 
 // if you want to unsubscribe to any hashtag you subscribe
 // just need to pass the ID Instagram send as response to you
-Instagram.subscriptions.unsubscribe({ id: '18472495' });
+Instagram.subscriptions.unsubscribe({ id: '18371424' });
 
 // https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
 io.configure(function () {
@@ -153,18 +153,16 @@ io.sockets.on('connection', function (socket) {
 
     var self = this;
 
-    var sj, sj15, twSJ, twSJ15 = false;
+    //var sj, sj15, twSJ, twSJ15 = false;
 
+    /*
     Instagram.tags.recent({
         name: 'samandjane',
         complete: function(data) {
-            /*createNewInstaList(data, function(data){
-                sj = data;
-                checkLists();
-            });*/
             io.sockets.emit('initialInsta', { data: data });
         }
     });
+    */
 
     Instagram.tags.recent({
         name: 'samandjane2015',
@@ -177,17 +175,12 @@ io.sockets.on('connection', function (socket) {
         }
     });
 
+    /*
     client.get('search/tweets', {q: '#samandjane', result_type: 'recent'}, function(error, tweets, response){
         if(error) throw error;
-
-        /*createNewInstaList(tweets.statuses, function(data){
-            twSJ = data;
-            checkLists();
-        });*/
-
         io.sockets.emit('initialTweet', { data: tweets.statuses });
-
     });
+    */
 
     client.get('search/tweets', {q: '#samandjane2015', result_type: 'recent'}, function(error, tweets, response){
         if(error) throw error;
@@ -201,6 +194,7 @@ io.sockets.on('connection', function (socket) {
 
     });
 
+    /*
     var createNewTweetList = function(list, callback) {
 
         var newList = [];
@@ -245,6 +239,8 @@ io.sockets.on('connection', function (socket) {
             }
         }
     };
+
+    */
 
     var checkLists = function() {
 
