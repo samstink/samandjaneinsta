@@ -134,7 +134,7 @@ var AppWrapper = React.createClass({
 
         var self = this;
 
-        if(!this.hasloaded) {
+        console.log('### initial load >', this.state.items.length);
 
           this.socket = io.connect(this.props.url);
 
@@ -153,10 +153,6 @@ var AppWrapper = React.createClass({
           });
 
           this.loadCommentsFromServer();
-
-          this.hasloaded = true;
-
-        }
 
     },
 
