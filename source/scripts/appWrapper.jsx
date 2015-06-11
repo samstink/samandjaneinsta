@@ -7,8 +7,6 @@ var AppWrapper = React.createClass({
 
     getInitialState: function () {
 
-        this.hasLoaded = false;
-
         return { items: [] };
 
     },
@@ -136,7 +134,7 @@ var AppWrapper = React.createClass({
 
         var self = this;
 
-        if(!this.hasLoaded) {
+        if(this.state.items.length > 0) {
 
           this.socket = io.connect(this.props.url);
 
@@ -155,8 +153,6 @@ var AppWrapper = React.createClass({
           });
 
           this.loadCommentsFromServer();
-
-          this.hasLoaded = true;
 
         }
 
