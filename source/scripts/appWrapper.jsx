@@ -161,18 +161,62 @@ var AppWrapper = React.createClass({
 
         console.log('createNewTweetList', list);
 
-        var newList = [];
+        if(!this.initialTweetsLoaded) {
 
-        for(var i = 0; i < list.length; i++) {
+            var newList = [];
 
-            if(list[i].entities.media && list[i].entities.media[0].type == "photo") {
+            for(var i = 0; i < list.length; i++) {
 
-                var newObj = {time: '', img: '', url: ''};
+                if(list[i].entities.media && list[i].entities.media[0].type == "photo") {
 
-                newObj.time = Math.round(Date.parse(list[i].created_at) / 1000);
-                newObj.img = list[i].entities.media[0].media_url_https;
-                newObj.url = list[i].entities.media[0].url;
-                newObj.type = 'image';
+                    var newObj = {time: '', img: '', url: ''};
+
+                    newObj.time = Math.round(Date.parse(list[i].created_at) / 1000);
+                    newObj.img = list[i].entities.media[0].media_url_https;
+                    newObj.url = list[i].entities.media[0].url;
+                    newObj.type = 'image';
+
+                    newList.push(newObj);
+
+                    if(i === list.length - 1 ) {
+                        console.log('created new list');
+                        this.updateList(newList);
+                    }
+                }
+            }
+
+            this.initialTweetsLoaded = true;
+
+        }
+    },
+
+    createNewInstaList : function(list) {
+
+        console.log('createNewInstaList', list);
+
+        if(!this.initialInstaLoaded) {
+
+            var newList = [];
+
+            for(var i = 0; i < list.length; i++) {
+
+                console.log(list[i]);
+
+                var newObj = {time: '', img: '', url: '', i:''};
+
+                newObj.time = list[i].created_time;
+                newObj.img = list[i].images.standard_resolution.url;
+                newObj.url = list[i].link;
+                newObj.id = list[i].id;
+
+                newObj.type = list[i].type;
+
+                if(newObj.type === 'video') {
+                  newObj.video = list[i].videos.standard_resolution.url;
+
+                }
+
+                console.log('newObj', newObj);
 
                 newList.push(newObj);
 
@@ -181,41 +225,9 @@ var AppWrapper = React.createClass({
                     this.updateList(newList);
                 }
             }
-        }
-    },
 
-    createNewInstaList : function(list) {
+            this.initialInstaLoaded = true;
 
-        console.log('createNewInstaList', list);
-
-        var newList = [];
-
-        for(var i = 0; i < list.length; i++) {
-
-            console.log(list[i]);
-
-            var newObj = {time: '', img: '', url: '', i:''};
-
-            newObj.time = list[i].created_time;
-            newObj.img = list[i].images.standard_resolution.url;
-            newObj.url = list[i].link;
-            newObj.id = list[i].id;
-
-            newObj.type = list[i].type;
-
-            if(newObj.type === 'video') {
-              newObj.video = list[i].videos.standard_resolution.url;
-
-            }
-
-            console.log('newObj', newObj);
-
-            newList.push(newObj);
-
-            if(i === list.length - 1 ) {
-                console.log('created new list');
-                this.updateList(newList);
-            }
         }
     },
 
