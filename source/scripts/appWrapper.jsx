@@ -5,8 +5,9 @@ var ImageList = require("./imageList.jsx");
 
 var AppWrapper = React.createClass({
 
-
     getInitialState: function () {
+
+        this.hasLoaded = false;
 
         return { items: [] };
 
@@ -134,23 +135,30 @@ var AppWrapper = React.createClass({
     componentDidMount: function () {
 
         var self = this;
-        this.socket = io.connect(this.props.url);
 
-        var initialList = [];
+        if(!this.hasLoaded) {
 
-        this.socket.on('initialInsta', function(data) {
-            console.log('first show data', data.data);
-            self.createNewInstaList(data.data);
-            //self.setState({ items: data.firstShow });
-        });
+          this.socket = io.connect(this.props.url);
 
-        this.socket.on('initialTweet', function(data) {
-            console.log('first tweet data', data.data);
-            self.createNewTweetList(data.data);
-            //self.setState({ items: data.firstShow });
-        });
+          var initialList = [];
 
-        this.loadCommentsFromServer();
+          this.socket.on('initialInsta', function(data) {
+              console.log('first show data', data.data);
+              self.createNewInstaList(data.data);
+              //self.setState({ items: data.firstShow });
+          });
+
+          this.socket.on('initialTweet', function(data) {
+              console.log('first tweet data', data.data);
+              self.createNewTweetList(data.data);
+              //self.setState({ items: data.firstShow });
+          });
+
+          this.loadCommentsFromServer();
+
+          this.hasLoaded = true;
+
+        }
 
     },
 
